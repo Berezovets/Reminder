@@ -26,14 +26,16 @@ function showUser(str) {
 
 <form>
 <select name="users" onchange="showUser(this.value)">
-<option value="">Select a person:</option>
-<option value="1">home</option>
-<option value="2">job</option>
-<option value="3">family</option>
+<option value="">Select a category:</option>
+<option value="home">home</option>
+<option value="job">job</option>
+<option value="family">family</option>
 </select>
 </form>
 <br>
-<div id="txtHint"><b>Person info will be listed here.</b></div>
-
+<div id="txtHint"><b>Note info will be listed here.</b></div>
+<div><b>Add note.</b>
+<a href="addnoteform.html">Create note</a>
+</div>
 </body>
 </html>

@@ -1,32 +1,33 @@
 <?php
-$q = intval($_GET['q']);
 
-$con = mysqli_connect('localhost','root','123456','my_test');
-if (!$con) {
-  die('Could not connect: ' . mysqli_error($con));
-}
+require_once($_SERVER[DOCUMENT_ROOT]."/class_db.php");
 
-mysqli_select_db($con,"remind");
-$sql="SELECT * FROM remind WHERE id = '".$q."'";
-$result = mysqli_query($con,$sql);
+$db = new DB("localhost", "root", "123456", "my_test");
 
-echo "<table border='1'>
-<tr>
-<th>Title</th>
-<th>Text</th>
-<th>Date_sign</th>
-<th>Category</th>
-</tr>";
+$q = $_GET['q'];
 
-while($row = mysqli_fetch_array($result)) {
-  echo "<tr>";
-  echo "<td>" . $row['title'] . "</td>";
-  echo "<td>" . $row['text'] . "</td>";
-  echo "<td>" . $row['date_sign'] . "</td>";
-  echo "<td>" . $row['category'] . "</td>";
-  echo "</tr>";
-}
-echo "</table>";
+$data = $db->query("SELECT * FROM remind WHERE category = '". $q ."'");
 
-mysqli_close($con);
+
+
+echo "<table class='table'>
+    <thead>
+        <th>title</th>
+        <th>text</th>
+        <th>date_sign</th>
+       </thead>
+    <tbody>";
+
+  $i=1;
+        foreach ($data as $v)
+        {
+        echo "<tr>";
+            echo "<td>". $v['title'] ."</td>";
+            echo "<td>". $v['text'] ."</td>";
+            echo "<td>". $v['date_sign'] ."</td>";
+        echo "</tr>";
+        $i++;
+	    }
+echo " </tbody>
+</table>";
 ?>
